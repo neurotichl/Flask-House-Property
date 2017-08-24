@@ -4,8 +4,8 @@ from datetime import datetime
 import sys
 import os
 
-# sys.path.insert(1,'C:\\Users\\chiau.lee\\Dropbox\\JP\\Scrapy\\iproperty\\House-Property\\')
-# from multihouse import *
+sys.path.insert(1,'C:\\Users\\user-pc\\Documents\\Python Scripts\\House-Property')
+from multihouse import *
 
 @app.route('/result')
 def result():
@@ -22,10 +22,17 @@ def map_plot(dt=0):
 @app.route('/', methods=['GET','POST'])
 def set_up_crawl():
 	if request.method == "POST":
-		if request.form['submit'] == 'View Result':
+		if request.form['submit'] == 'View History':
 			return redirect(url_for('result'))
 		else:
 			result = request.form
+			import time
+			time.sleep(10)
+			# crawling({'Low':{'state':'selangor,kuala-lumpur',
+			# 				 'max_price':'300k'},
+			# 			'High':{'state':'selangor,kuala-lumpur',
+			# 					 'min_price':'300k',
+			# 					'max_price':'420k'}})
 			return render_template("filledform.html",result = result)
 
 	states=['Johor',

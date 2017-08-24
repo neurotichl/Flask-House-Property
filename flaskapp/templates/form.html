@@ -5,7 +5,7 @@
 <body>
   <div id="contact-form">
     <h1> House Property Crawler </h1>  
-     <form method="post" action="/">
+     <form method="post" action="/" id="formdata">
        <div id="state">
          <span>Select State:</span>
           <select name = "states">
@@ -27,9 +27,19 @@
           {% endfor %}
         </span>
       </div>
-      <input type="submit" name="submit" value="Submit Crawl Result">
-      <input type="submit" name="submit" value="Go Back">
+      <input type="submit" name="submit" value="Start Crawl" onclick="loadpage()">
+      <input type="submit" name="submit" value="View History">
     </form>  
+    <form id="load" style="display:none;" > 
+      <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" >
+      Please Wait while the data is being crawled...
+    </form>
   </div>
+  <script>
+    function loadpage(){
+      document.getElementById("formdata").style.display = "none";
+      document.getElementById("load").style.display = "block";
+    }
+  </script>
 </body>
 
