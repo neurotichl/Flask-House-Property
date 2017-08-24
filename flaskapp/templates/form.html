@@ -1,0 +1,35 @@
+<head>
+  <title> House Property Crawler</title>
+  <link rel="stylesheet" type="text/css" href={{url_for('static',filename='home.css')}}>
+</head>
+<body>
+  <div id="contact-form">
+    <h1> House Property Crawler </h1>  
+     <form method="post" action="/">
+       <div id="state">
+         <span>Select State:</span>
+          <select name = "states">
+            <option value = "" selected>
+            {% for s in states %}
+            <option value = "{{s}}">{{s}}
+            {% endfor %}
+          </select>
+       </div>
+       <div id = "budget">
+         <span>Enter min and max budget:</span><br>
+          <input type="text" name="min_price">
+          <input type="text" name="max_price">
+       </div>
+      <div id="tenure">
+        <span>Type of tenure</span><br>
+          {% for t in tenure %}
+          <input type="radio" name="tenure" value="{{t}}"> {{t}} <br>
+          {% endfor %}
+        </span>
+      </div>
+      <input type="submit" name="submit" value="Submit Crawl Result">
+      <input type="submit" name="submit" value="Go Back">
+    </form>  
+  </div>
+</body>
+
