@@ -23,7 +23,7 @@ def result(result=None):
 
 @app.route('/table')
 def table(result=None):
-	with open('data/item.js') as data_file:    
+	with open('data/item2.js') as data_file:    
 		data = json.load(data_file)
 	cols = ['name', 'tenure', 'price', 'size','amenities', 'address', 'link']
 	return render_template('table.html', resp_json=data, columns=cols)
@@ -33,6 +33,7 @@ def table(result=None):
 def map_plot(dt=0):
 	return render_template("map/house_prop_{}.html".format(dt))
 
+
 @app.route('/', methods=['GET','POST'])
 def set_up_crawl():
 	if request.method == "POST":
@@ -40,14 +41,13 @@ def set_up_crawl():
 			return redirect(url_for('result'))
 		else:
 			result = request.form.copy()
-			process = CrawlerProcess({
-				'FEED_URI':'house_{}_{}.csv'.format(result['user'],datetime.today().date().isoformat()),
-				'FEED_FORMAT':'csv'
-				})
-			result['state'] = 'selangor,kuala-lumpur'
-			result = {k:v for k,v in result.items() if k in ['state','min_price','max_price']}
-			process.crawl(HouseSpiderExp,**result)
-			process.start(stop_after_crawl=False)
+			state = result.get('state') or 'kuala-lumpur'
+			min_price = result.get('min_price') or '280'
+			max_price = result.get('max_price') or '350'
+			scrapyrt_url = 'http://localhost:9080/crawl.json?spider_name=house_exp&url='
+			req_url = 'https://www.iproperty.com.my/buy/{0}/?mp={1},000&xp={2},000&ht=F'.format(state,min_price,max_price)
+			resp = requests.get(scrapyrt_url+req_url)
+			json.dump(json.loads(resp.text)['items'],open('data/item2.js','w'))
 			return redirect(url_for('result'))
 			# return render_template("filledform.html",result = result)
 
