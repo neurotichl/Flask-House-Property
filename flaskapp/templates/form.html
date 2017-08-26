@@ -6,12 +6,16 @@
   <div id="contact-form">
     <h1> House Property Crawler </h1>  
      <form method="post" action="/" id="formdata">
+       <div id="user">
+         <span>Hi! Whats your name?:</span></br>     
+         <input type="text" name="user">
+       </div>
        <div id="state">
          <span>Select State:</span>
           <select name = "states">
             <option value = "" selected>
-            {% for s in states %}
-            <option value = "{{s}}">{{s}}
+            {% for k,s in states.items() %}
+            <option value = "{{k}}">{{s}}
             {% endfor %}
           </select>
        </div>
@@ -31,7 +35,7 @@
       <input type="submit" name="submit" value="View History">
     </form>  
     <form id="load" style="display:none;" > 
-      <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" >
+      <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" ><br>
       Please Wait while the data is being crawled...
     </form>
   </div>
