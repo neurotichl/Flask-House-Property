@@ -14,6 +14,7 @@ BOT_NAME = 'iproperty'
 SPIDER_MODULES = ['iproperty.spiders']
 NEWSPIDER_MODULE = 'iproperty.spiders'
 
+# USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36'
 # FEED_FORMAT = 'csv'
 # FEED_URI = 'house.csv'
 

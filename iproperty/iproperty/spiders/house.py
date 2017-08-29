@@ -3,19 +3,20 @@ import scrapy
 from iproperty.items import IpropertyItem
 from scrapy.http import Request
 import re
+
 class HouseSpider(scrapy.Spider):
 	name = "houseprop"
 	allowed_domains = ["www.iproperty.com.my"]
-	xpath_dict = {'main_list' :'//li[contains(@class,"listing")]',
-				'check_price':'.//div[@class="price-margin"]/h2/text()',
-				'name'		 :'.//div[@class="left"]/a/h2/text()',
-				'amenities'	 :'.//div[@class="room-amenities"]//span[@class="no"]/@title',
-				'link'		 :'.//div[contains(@class,"headers")]/div[@class="left"]/a/@href',
-				'address'	 :'//div[@class="building-info-one"]/h2/text()',
-				'prize_size' :'//div[@class="building-info-two"]/h2/text()',
-				'next_page'  :'//li[@class="button"]/a[contains(text(),"Next")]/@href',
-				'tenure'	 :'//ul[@class="infos"]/li[contains(text(),"Tenure")]/text()',
-				'post_date'  :'//ul[@class="infos"]/li[contains(text(),"Posted Date")]/text()'}
+	xpath_dict = {'main_list'    :'//li[contains(@class,"listing")]',
+				  'check_price'  :'.//div[@class="price-margin"]/h2/text()',
+				  'name'		 :'.//div[@class="left"]/a/h2/text()',
+				  'amenities'	 :'.//div[@class="room-amenities"]//span[@class="no"]/@title',
+				  'link'		 :'.//div[contains(@class,"headers")]/div[@class="left"]/a/@href',
+				  'address'	     :'//div[@class="building-info-one"]/h2/text()',
+				  'prize_size'   :'//div[@class="building-info-two"]/h2/text()',
+				  'next_page'    :'//li[@class="button"]/a[contains(text(),"Next")]/@href',
+				  'tenure'	     :'//ul[@class="infos"]/li[contains(text(),"Tenure")]/text()',
+				  'post_date'    :'//ul[@class="infos"]/li[contains(text(),"Posted Date")]/text()'}
 
 	def __init__(self,state = 'pulau-pinang', min_price = '280', max_price = '350'):
 		if ',' in state:
